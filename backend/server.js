@@ -32,6 +32,10 @@ const uploadsRoot = path.join(process.cwd(), "uploads");
 fs.mkdirSync(uploadsRoot, { recursive: true });
 app.use("/uploads", express.static(uploadsRoot));
 
+app.get("/", (req, res) => {
+  res.json({ message: "Portfolio Platform API is running smoothly", status: "healthy" });
+});
+
 app.get("/api/health", (req, res) => {
   res.json({ ok: true });
 });
