@@ -17,8 +17,11 @@ export async function signup(req, res, next) {
       err.statusCode = 400;
       return next(err);
     }
-    if (String(password).length < 6) {
-      const err = new Error("Password must be at least 6 characters");
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$/;
+    if (!passwordRegex.test(String(password))) {
+      const err = new Error(
+        "Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character."
+      );
       err.statusCode = 400;
       return next(err);
     }
